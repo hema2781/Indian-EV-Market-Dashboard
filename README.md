@@ -11,22 +11,22 @@ Indian EV Market: https://indian-ev-market-dashboard.streamlit.app/
 
 ## Directory Structure
 INDIAN-EV-MARKET-DASHBOARD
-├─ assets
-│  ├─ datasets
-│  ├─ ├─ EV Maker by Place.csv
-│  ├─ ├─ ev_cat_01-24.csv
-│  ├─ ├─ ev_sales_by_makers_and_cat_15-24.csv
-│  ├─ ├─ OperationalPC.csv
-│  ├─ ├─ Vehicle Class - All.csv
-├─ images/
-│  ├─ analysis.ico/
-│  ├─ Indian EV Market Logo.svg/
-├─ preprocessor.py/
-├─ charts.py/
-├─ main.py/
-├─ Indian_States.geojson/
-├─ requirements.txt/
-├─ README.md/
+> ├─ assets/
+> │  ├─ ├─ EV Maker by Place.csv/
+> │  ├─ datasets/
+> │  ├─ ├─ ev_cat_01-24.csv/
+> │  ├─ ├─ ev_sales_by_makers_and_cat_15-24.csv/
+> │  ├─ ├─ OperationalPC.csv/
+> │  ├─ ├─ Vehicle Class - All.csv/
+> ├─ images/
+> │  ├─ analysis.ico/
+> │  ├─ Indian EV Market Logo.svg/
+> ├─ preprocessor.py/
+> ├─ charts.py/
+> ├─ main.py/
+> ├─ Indian_States.geojson/
+> ├─ requirements.txt/
+> ├─ README.md/
 
 ## Video Walkthrough of the project
 https://youtu.be/KmtujzDYeJM
