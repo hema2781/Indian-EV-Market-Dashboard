@@ -4,13 +4,13 @@ import charts as charts
 import preprocessor
 
 #Adjusting the tab image and name
-st.set_page_config(page_icon='analysis.ico', page_title='Indian EV Market', layout='wide')
+st.set_page_config(page_icon='./assets/images/analysis.ico', page_title='Indian EV Market', layout='wide')
 
 col13,col14 = st.columns([1,4])
 
 # Dashboard Logo Section 
 with col13:
-    st.image('Indian EV Market Logo.svg', width=220, use_container_width=False)    
+    st.image('./assets/images/Indian EV Market Logo.svg', width=220, use_container_width=False)    
 
 # Dashboard Details Section
 with col14:
