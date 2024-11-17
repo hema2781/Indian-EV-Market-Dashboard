@@ -3,17 +3,22 @@ import json
 import charts as charts
 import preprocessor
 
+#Adjusting the tab image and name
 st.set_page_config(page_icon='analysis.ico', page_title='Indian EV Market', layout='wide')
 
 col13,col14 = st.columns([1,4])
+
+# Dashboard Logo Section 
 with col13:
     st.image('Indian EV Market Logo.svg', width=220, use_container_width=False)    
+
+# Dashboard Details Section
 with col14:
     st.title('Indian EV Market (2001 - 2024)')
     st.write("The purpose of the Indian EV Market Dashboard is to provide a comprehensive, interactive visualization of the electric vehicle landscape in India. By analyzing key metrics and trends within the EV market, this dashboard offers insights into EV adoption rates, market share, regional distributions, vehicle types, and growth patterns over time. This tool aims to support data-driven decision-making for stakeholders such as policymakers, industry analysts, and businesses, helping them understand market dynamics and identify emerging opportunities in India’s rapidly evolving EV sector.")
 
 
-
+#Initializing and assigning all datasets
 df = preprocessor.ev_maker()
 
 df_ev_sales = preprocessor.ev_sales()
@@ -64,7 +69,7 @@ with col7:
 
 st.header('Manufacturer Market Share (Year-on-Year)')
 col8,col9 = st.columns(2)
-
+# Chart 5: Top 10 Manufactures
 with col8:
     year = st.slider(
     label='Select Year of Sales',
@@ -77,6 +82,7 @@ with col8:
         year = str(year)
         top_maker_name = charts.plot_top_makers(df_ev_sales, [year],year)  # Capture the top manufacturer name
 with col9:
+    # Chart 6: Selected Manufacturer Category Distribution
     top_makers_data = df_ev_sales.groupby('Maker')[[year]].sum().reset_index()
     top_makers_data = df_ev_sales.sort_values(by=year, ascending=False).head(10)
     top_makers_list = top_makers_data['Maker'].tolist()
@@ -110,14 +116,17 @@ with col11:
 col20, col21 = st.columns(2)
 
 with col20:
+    # Chart 7: Registrtation by class of vehicle
     charts.ev_cat_reg(df_ev_reg)
 
 with col21:
     selected_cat = st.selectbox('Select a Vehicle Category', options=df_ev_cat_date.columns[1:-1], index=14)
+
+    # Chart 8: Registrtation growth of selected class of vehicle
     charts.ev_cat_growth(df_ev_cat_date,selected_cat)
 
 
-
+#Generating an ID column and assigning state ids for each state from the geojson data
 state_id_map = {}
 for feature in india_states['features']:
     feature['id'] = feature['properties']['state_code']
@@ -144,10 +153,12 @@ with col11:
 with col12:
     st.metric(label="Total PCS in India", value=total_stations_india)
 
+# Chart 9: Map plotting of Operational Charging Station
 charts.india_map_plot(df_charging_station,india_states)
 
 
 
+#Custom footer in raw html/css paired with markdown feature of streamlit
 footer = """
 <style>
 a:link, a:visited {

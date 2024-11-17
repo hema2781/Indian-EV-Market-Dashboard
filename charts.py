@@ -3,6 +3,8 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+
+# Chart 1: EV Makers by State
 def plot_ev_makers_by_state(df):
     state_ev_maker = df.groupby('State')['EV Maker'].count().to_frame('Total Manufacturing Plants').sort_values(by='Total Manufacturing Plants', ascending=False).reset_index()
     chart = alt.Chart(state_ev_maker).mark_bar().encode(
@@ -17,6 +19,7 @@ def plot_ev_makers_by_state(df):
     )
     st.altair_chart(chart, use_container_width=True)
 
+# Chart 2: EV Makers by City
 def plot_ev_makers_by_city(df):
     city_ev_maker = df.groupby('Place')['EV Maker'].count().to_frame('Total Manufacturing Plants').sort_values(by='Total Manufacturing Plants', ascending=False).reset_index()
     chart = alt.Chart(city_ev_maker.head(10)).mark_bar().encode(
@@ -31,6 +34,7 @@ def plot_ev_makers_by_city(df):
     )
     st.altair_chart(chart, use_container_width=True)
 
+# Chart 3: EV Sales Growth
 def plot_ev_sales_growth(df_ev_sales):
     # Prepare the data
     df_ev_growth = df_ev_sales[['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']].sum().reset_index()
@@ -58,6 +62,7 @@ def plot_ev_sales_growth(df_ev_sales):
     st.plotly_chart(fig, use_container_width=True)
 
 
+# Chart 4: Yearly Sales by Category
 def plot_yearly_sales_category(filtered_data, year_cols):
     yearly_sales_data = filtered_data.groupby('Cat')[year_cols].sum().reset_index()
     fig_yearly_sales = px.bar(yearly_sales_data.melt(id_vars='Cat', var_name='Year', value_name='Sales'),
@@ -65,6 +70,7 @@ def plot_yearly_sales_category(filtered_data, year_cols):
     st.subheader("Yearly Sales by Category")
     st.plotly_chart(fig_yearly_sales)
 
+# Chart 5: Top 10 Manufactures
 def plot_top_makers(filtered_data, year_cols, year):
     # Prepare data for top manufacturers
     top_makers_data = filtered_data.groupby('Maker')[year_cols].sum().reset_index()
@@ -92,7 +98,7 @@ def plot_top_makers(filtered_data, year_cols, year):
     return top_maker_name  # Return the top manufacturer's name
 
 
-
+# Chart 6: Selected Manufacturer Category Distribution
 def plot_top_market_share(df_ev_sales, selected_maker,year):
     filtered_data = df_ev_sales[df_ev_sales['Maker'] == selected_maker]
 
@@ -110,7 +116,7 @@ def plot_top_market_share(df_ev_sales, selected_maker,year):
     )
     st.plotly_chart(fig)
 
-
+# Chart 7: Registrtation by class of vehicle
 def ev_cat_reg(df_ev_reg):
     chart = alt.Chart(df_ev_reg).mark_bar().encode(
     x=alt.X('Total Registration:Q', title='Total Registration'),
@@ -127,7 +133,7 @@ def ev_cat_reg(df_ev_reg):
     )
     st.altair_chart(chart, use_container_width=True)
 
-
+# Chart 8: Registrtation growth of selected class of vehicle
 def ev_cat_growth(df_ev_cat_date,selected_cat):
     filtered_df_cat = df_ev_cat_date.groupby('Year')[selected_cat].sum().to_frame('Total Registration').sort_values(by='Year', ascending = False).reset_index()
     chart = alt.Chart(filtered_df_cat).mark_bar().encode(
@@ -146,7 +152,7 @@ def ev_cat_growth(df_ev_cat_date,selected_cat):
     st.altair_chart(chart, use_container_width=True)
 
 
-
+# Chart 9: Map plotting of Operational Charging Station
 def india_map_plot(df_charging_station,india_states):
     fig = px.choropleth(df_charging_station, 
                     locations='id', 
