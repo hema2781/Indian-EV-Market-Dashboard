@@ -28,12 +28,6 @@ INDIAN-EV-MARKET-DASHBOARD
 - ├─ requirements.txt/
 - ├─ README.md/
 
-## Video Walkthrough of the project
-https://youtu.be/KmtujzDYeJM
-
-## Video Walkthrough of the codebase
-https://youtu.be/E963Q4vFQew
-
 ## Features
 - Analysis of overall EV Market (2001-2024).
 - KPIs of Overall EV Market.
